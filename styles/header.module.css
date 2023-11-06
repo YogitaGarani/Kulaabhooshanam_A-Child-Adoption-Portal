@@ -1,0 +1,43 @@
+
+
+.header {
+    background: #ffff; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: large;
+    height: 90px;
+}
+
+.header > div > h2 {
+    color: black;
+    font-weight: 700;
+}
+
+.navContainer {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.navContainer a {
+    margin-right: 30px;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto; /* Let the height be determined by content */
+        padding: 5%; /* Add padding for spacing */
+    }
+
+    .navContainer {
+        flex-direction: column; /* Stack navigation links vertically */
+        margin-top: 2.5%; /* Add top margin for spacing between links and header content */
+    }
+
+    .navContainer a {
+        margin: 10px 0; /* Adjust spacing between navigation links */
+    }
+}

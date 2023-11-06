@@ -1,0 +1,137 @@
+.container {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+  height: 100vh;
+  
+  /* border: 2px solid black; */
+}
+
+.backgroundImage {
+  position: relative;
+  width: 100%;
+  height: 90vh; 
+  background-image: url('/children2.jpg'); 
+  background-size: cover;
+  background-position: center;
+  opacity: 0.76; 
+  text-align: center;
+  color: white;
+}
+
+.insideText {
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  font-size: xx-large;
+  font-weight: 800;
+}
+
+.pText {
+  margin-top: 3%;
+  text-align: center;
+  font-size: large;
+  font-style: italic;
+  align-items: center;
+}
+
+.hrElement {
+  width: 50px; 
+  margin: 10px auto; 
+  border: none; 
+  border-top: 1.5px solid #000;
+}
+
+.greenStats {
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 25px 30px;
+  font-size: large;
+  /* text-align: center; */
+  box-sizing: border-box;
+  background-color: #9ae5acef;
+}
+
+.statNumber {
+  font-weight: bold;
+  margin-right: 5px;
+  font-size: larger;
+}
+
+
+/* h3 {
+  text-align: center;
+} */
+
+.cardContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: calc(50% - 20px); /* card width with 50% of the container with some spacing */
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px); 
+}
+
+.cardContentHeader {
+  font-weight: bold;
+  font-size: large;
+}
+.cardContent {
+  text-align: center;
+  margin-right: 2%;
+  font-size: medium;
+}
+
+.centerButtonContainer {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.applyNowBtn {
+  background-color: #04aa6d;
+  font-weight: bold;
+  font-size: larger;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  color: white;
+  width: 40%;
+  padding: 14px 20px;
+  margin-left: 20px;
+}
+
+.giveUpChild {
+  margin-top: 2%;
+  text-decoration: underline;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+/* h3 {
+  font-size: 24px;
+  margin: 10px 0;
+} 
+
+p {
+  font-size: 16px;
+  color: #555;
+}
+*/
