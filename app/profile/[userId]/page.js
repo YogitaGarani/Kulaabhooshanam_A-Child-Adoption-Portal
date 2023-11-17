@@ -1,4 +1,7 @@
 "use client"
+
+// Dynamically routed page specific to the user
+
 import React, { useEffect, useState } from "react";
 import styles from "../../../styles/profile.module.css";
 
@@ -7,7 +10,7 @@ const ProfilePageForUser = ({ params }) => {
   console.log(decodeURIComponent(params.userId + typeof params.userId));
   const userId = decodeURIComponent(params.userId);
 
-  const [mapped, setMapped] = useState([]);
+  const [mapped, setMapped] = useState([]); // store mapped kids values
   const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   // get their profile stuff
@@ -19,21 +22,17 @@ const ProfilePageForUser = ({ params }) => {
           "Content-Type": "application/json",
         },
       };
-      // const res = await fetch(
-      //   `${process.env.NEXT_PUBLIC_URL}/api/profile?userId=${userId}`,
-      //   postData
-      // );
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/api/profile/${userId}`,
         postData
       );
-      console.log("URL BEING USED:" + process.env.NEXT_PUBLIC_URL)
+
       if (!res.ok) {
         throw new Error(`API request failed with status ${res.status}`);
       }
 
       const response = await res.json();
-      console.log("API Response:", response);
+
       setMapped(response.mapped); // Update state with the correct table name
       setIsLoading(false); // Set loading state to false
     } catch (error) {
@@ -43,8 +42,6 @@ const ProfilePageForUser = ({ params }) => {
   }
 
   useEffect(() => {
-    console.log("use effect works"); // works
-    console.log("userID in useeffct" + userId);  // works
     getDetails();
   }, [userId]);
 
@@ -65,14 +62,12 @@ const ProfilePageForUser = ({ params }) => {
             
             <div key={item.child_id} className={styles.childCard}>
               <h3>Your preferences match...</h3>
-              {/* <p><span>Child ID</span>: {item.Child_id}</p> */}
               <p><span>Name</span>: {item.c_name}</p>
               <p><span>Age</span>: {item.age}</p>
               <p><span>Date Admitted</span>: {formattedDate}</p>
               <p><span>Sex</span>: {item.sex}</p>
               <p><span>Status</span>: {item.adoption_status}</p>
               <p><span>genetic disorders</span>: {item.genetic_disorder}</p>
-              {/* <p><span>Genetic Disorder</span>: {item.genetic_disorder !== null ? item.genetic_disorder : "None"}</p> */}
             </div>
           );
         })

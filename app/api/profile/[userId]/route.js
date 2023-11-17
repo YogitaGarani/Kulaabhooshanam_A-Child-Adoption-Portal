@@ -3,9 +3,8 @@ import { query } from "../../../lib/db";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
-  console.log("in here GET")
     const userId = params.userId;
-    console.log("user id" + userId);  // works till here - it prints out the id from the url
+ 
 
       const mapped = await query({
           query: `SELECT children.*

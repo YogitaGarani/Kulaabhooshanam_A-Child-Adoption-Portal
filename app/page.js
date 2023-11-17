@@ -5,10 +5,13 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import { testimonials } from './testimonials';
 
 export default function Home() {
   const router = useRouter();
-  const [agencies, setAgencies] = useState([]);
+  const [agencies, setAgencies] = useState([]); 
   const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   async function getAgencies() {
@@ -24,14 +27,13 @@ export default function Home() {
         postData
       );
 
-      console.log("URL BEING USED:" + process.env.NEXT_PUBLIC_URL)
       if (!res.ok) {
         throw new Error(`API request failed with status ${res.status}`);
       }
 
       const response = await res.json();
       console.log("API Response:", response);
-      setAgencies(response.adoptionagency); // Update state with the correct table name
+      setAgencies(response.adoptionagency); // Update state with the relevant agency table
       setIsLoading(false); // Set loading state to false
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -44,13 +46,27 @@ export default function Home() {
   }, []);
 
   const onApplyClick = () => {
-    console.log("apply button clicked")
     router.push("/application")
+  }
+
+// carousel settings for responsiveness
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 530 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 530, min: 0 },
+      items: 1,
+    },
   }
 
   return (
     <div className={styles.container}>
-      
       <div className={styles.backgroundImage}>
         <h1 className={styles.insideText}>Welcome to Kulaabhooshanam!</h1>
       </div>
@@ -88,37 +104,42 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Testimonials */}
+
+      <h1 className={styles.testimonialHeader}>Testimonials</h1>
+      <hr className={styles.hrElement}/>
+
+      <Carousel 
+      showThumbs={false} 
+      autoPlay 
+      responsive={responsive}
+      ssr
+      containerClass="container-with-dots"
+      itemClass="image-item"
+      >
+
+        {testimonials.map((item) => (
+          <div key={item.id} className={styles.testimonialCard}>
+            <Image src={item.src} alt="Image" width={200} height={200} className={styles.myImage} />
+            <p>{item.content}</p>
+            <h2>{item.header}</h2>
+            
+          </div>
+        ))}
+      </Carousel>
+
+          {/* Apply for adoption CTA */}
       <div className={styles.centerButtonContainer}>
         <button className={styles.applyNowBtn} onClick={() => onApplyClick()}>Apply Now</button>
       </div>
+
+      {/* Give a child up for adoption CTA */}
       <div className={styles.giveUpChild}>
         <Link href={"/give-up"}> 
         <p>Want to give up a child for adoption?</p>
         </Link>
       </div>
-      
 
-
-      {/* Display the fetched data */}
-      <div>
-      <h2>Read Adoption Agencies</h2>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : agencies.length > 0 ? (
-        agencies.map((item, index) => {
-          return (
-            <div key={item.agency_id}>
-              <span>agency_id</span>: {item.agency_id} 
-              <span>name</span>: {item.agency_name} <br />
-              <span>location</span>: {item.location} <br />
-              <span>contacts</span>: {item.email_id} 
-            </div>
-          );
-        })
-      ) : (
-        <p>No agencies to display.</p>
-      )}
-      </div>
     </div>
   )
 }

@@ -5,23 +5,22 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
     const data = await request.json();
-    console.log(data);
+    console.log(data);  // json of the data sent by the form
     let message;
     const sex = data.sex;
     const childAge = data.age;
     const childName = data.c_name;
     const geneticDisorder = data.genetic_disorder;
+    const adoptionStatus = "inhouse"; // default inhouse
     
     // Check for undefined values
-    console.log("here1")
-    console.log(sex + " " + childAge + " " + childName + " " + geneticDisorder); // -- works
     if (
       sex === undefined ||
       childAge === undefined ||
       childName === undefined ||
       geneticDisorder === undefined
     ) {
-        console.log("here2")
+
       return NextResponse.json(
         { message: "error", error: "Invalid input data" },
         { status: 400 }
@@ -29,15 +28,15 @@ export async function POST(request) {
     }
     
     try {
-      console.log("in try block of POST req")
 
       const addChildData = await query({
         query:
-          `INSERT INTO children(c_name, sex, age, genetic_disorder) VALUES(?, ?, ?, ?)`,
-        values: [childName, sex, childAge, geneticDisorder],
+          `INSERT INTO children(c_name, sex, age, genetic_disorder, adoption_status) VALUES(?, ?, ?, ?, ?)`,
+        values: [childName, sex, childAge, geneticDisorder, adoptionStatus],
       });
   
       // if insertion was a success, it generates an id
+      // set table names to the corresponding variables used here
       if (addChildData.insertId) {
         message = "success";
         let ChildData = {
@@ -71,5 +70,6 @@ export async function POST(request) {
       query: "SELECT * FROM application",
       values: [],
     });
+    // send response back to client side
     return NextResponse.json({ application: applicationStuff });
   }

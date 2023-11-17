@@ -1,11 +1,5 @@
 .container {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; */
   height: 100vh;
-  
-  /* border: 2px solid black; */
 }
 
 .backgroundImage {
@@ -51,9 +45,8 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 25px 30px;
   font-size: large;
-  /* text-align: center; */
   box-sizing: border-box;
-  background-color: #9ae5acef;
+  background-color: #a5e1b3ef;
 }
 
 .statNumber {
@@ -63,10 +56,6 @@
 }
 
 
-/* h3 {
-  text-align: center;
-} */
-
 .cardContainer {
   display: flex;
   justify-content: space-between;
@@ -75,7 +64,7 @@
 
 .card {
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: calc(50% - 20px); /* card width with 50% of the container with some spacing */
@@ -96,6 +85,33 @@
   text-align: center;
   margin-right: 2%;
   font-size: medium;
+}
+
+.testimonialHeader {
+  text-align: center;
+  margin-top: 2%;
+}
+
+.testimonialCard {
+  padding: 2%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  background-color: #fff;
+  text-align: center;
+  margin: 2%;
+  border-radius: 10px;
+}
+
+.testimonialCard > h2 {
+  font-size: large;
+  color: #424040;
+  margin-top: 1%;
+}
+
+
+.myImage {
+  border-radius: 50%;
+  margin-bottom: 1%;
 }
 
 .centerButtonContainer {
@@ -123,15 +139,5 @@
   display: flex;
   justify-content: center; 
   align-items: center; 
+  padding-bottom: 2%;
 }
-
-/* h3 {
-  font-size: 24px;
-  margin: 10px 0;
-} 
-
-p {
-  font-size: 16px;
-  color: #555;
-}
-*/
