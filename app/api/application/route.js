@@ -5,17 +5,11 @@ import { NextResponse } from "next/server";
 
 // check if ID isnt even in the parents table, so not registered
 async function checkIfNotRegistered(id) {
-  //const connection = await pool.getConnection();
   try {
-    console.log("parent table id checking--");
     const IdStuff = await query({
       query: 'SELECT * FROM parents WHERE p_id = ?',
       values: [id]
     });
-
-    console.log("parent id checking qafter query");
-    // console.log("parent Rows: " + IdStuff);
-    console.log(IdStuff.length === 0 ? "not in parents" : "in parents")
 
     // If rows is empty, the ID does not exist
     return IdStuff.length === 0;
@@ -30,17 +24,11 @@ async function checkIfNotRegistered(id) {
 
 // check if an ID exists in the application table
 async function checkIfIDExists(id) {
-  //const connection = await pool.getConnection();
   try {
-    console.log("id checking--");
     const IdStuff = await query({
       query: 'SELECT * FROM application WHERE p_id = ?',
       values: [id]
     });
-
-    console.log("id checking qafter query");
-    // console.log("Rows: " + IdStuff);
-    console.log(IdStuff.length > 0 ? "In application" : "Not in application yet");
 
     // If rows is not empty, the ID already exists
     return IdStuff.length > 0;
@@ -55,23 +43,20 @@ async function checkIfIDExists(id) {
 
 export async function POST(request) {
     const data = await request.json();
-    console.log(data);
+    console.log(data);  // json of the data sent by the form inputs
     let message;
     const sex = data.sex;
     const childAge = data.child_age;
     const parentID = data.p_id;
     const geneticDisorder = data.g_disorder;
-    
-    // Check for undefined values
-    console.log("here1")
-    // console.log(sex + " " + childAge + " " + parentID + " " + geneticDisorder); // -- works
+     
     if (
       sex === undefined ||
       childAge === undefined ||
       parentID === undefined ||
       geneticDisorder === undefined
     ) {
-        console.log("here2")
+
       return NextResponse.json(
         { message: "error", error: "Invalid input data" },
         { status: 400 }
@@ -81,19 +66,17 @@ export async function POST(request) {
     try {
       const notRegistered = await checkIfNotRegistered(parentID);
       const idExists = await checkIfIDExists(parentID);
-      console.log("parent id does not exist: " + notRegistered);
-      console.log("id exists bools: " + idExists);
-      console.log()
+
+      // User has not registered
       if (notRegistered) {
-        console.log("POST REQ CHECKING FOR id if block --- not registered only");
         return NextResponse.json(
           { message: "error", error: "ID does not exists." },
           { status: 400 }
         ); // Bad Request
       }
 
+      // User has already applied
       if (idExists) {
-        console.log("POST REQ CHECKING FOR id if block --- already applied! ");
         return NextResponse.json(
           { message: "error", error: "ID already exists." },
           { status: 400 }
@@ -107,6 +90,7 @@ export async function POST(request) {
       });
   
       // if insertion was a success, it generates an id
+      // set table names to the corresponding variables used here
       if (addApplicationData.insertId) {
         message = "success";
         let applicationData = {
@@ -139,5 +123,7 @@ export async function POST(request) {
       query: "SELECT * FROM application",
       values: [],
     });
+
+    // send response back to the client side
     return NextResponse.json({ application: applicationStuff });
   }

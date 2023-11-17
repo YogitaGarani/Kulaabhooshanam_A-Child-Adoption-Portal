@@ -11,17 +11,15 @@
     display: flex;
     border-radius: 0.5rem;
     width: 50%;
-    /* width: 100%; */
     font-weight: 400;
     padding-left: 2rem;
     margin-top: 2rem;
 }
 
 .formContainer {
-    /* border: 2px solid red; */
     background: #ffffff;
     display: flex;
-    flex-direction: column; /* Display children in a column layout */
+    flex-direction: column; 
     border-radius: 0.5rem;
     width: 50%;
     font-weight: 400;
@@ -81,6 +79,7 @@
 .radioDivs {
     display: flex;
     align-items: center;
+    margin-bottom: 1.2rem;
 }
 
 .radioDivs > * + * {
@@ -112,7 +111,7 @@
     border: none;
     cursor: pointer;
     width: 90%;
-    margin-top: 1.2rem;
+    /* margin-top: 1.2rem; */
     border-radius: 0.5rem;
 }
 
@@ -131,10 +130,17 @@
 }
 
 .successMsg {
-    color: green;
-    font-weight: bold;
-    font-size: large;
-}
+    margin-top: 2%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 5%;
+    width: 90%;
+    font-size: medium;
+    box-sizing: border-box;
+    color: darkgreen;
+    background-color: #a5e1b3ef;
+  }
 
 .errorMsg {
     color: red;

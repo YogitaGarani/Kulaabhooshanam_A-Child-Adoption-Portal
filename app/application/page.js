@@ -2,13 +2,14 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { NextResponse } from "next/server";
+// import { NextResponse } from "next/server";
 import Image from 'next/image';
 import formImage from "../../public/formImages.jpg"
 import styles from "../../styles/forms.module.css";
 
 const Application = () => {
   const router = useRouter();
+  // refs pointing to the form input values
   const parentIDToAddRef = useRef();
   const sexOfChildToAddRef = useRef();
   const ageOfChildToAddRef = useRef();
@@ -19,8 +20,8 @@ const Application = () => {
 
   
     // testing for get part
-    //const router = useRouter();
-    const [applicationStuff, setApplicationStuff] = useState([]);
+
+    const [applicationStuff, setApplicationStuff] = useState([]);  // storing state for appln
     const [isLoading, setIsLoading] = useState(true); // Add loading state
   
     async function getApplications() {
@@ -36,13 +37,11 @@ const Application = () => {
           postData
         );
   
-        console.log("URL BEING USED:" + process.env.NEXT_PUBLIC_URL)
         if (!res.ok) {
           throw new Error(`API request failed with status ${res.status}`);
         }
   
         const response = await res.json();
-        console.log("API Response:", response);
         setApplicationStuff(response.application); // Update state with the correct table name
         setIsLoading(false); // Set loading state to false
       } catch (error) {
@@ -57,15 +56,14 @@ const Application = () => {
 
 
     // post part
+    // parseInt - convert the age to a decimal
     async function addData () {
       try {
-        console.log("add data clicked")
         const sex = sexOfChildToAddRef.current.value.trim();
         const childAge = ageOfChildToAddRef.current.value.trim();
         const parentID = parentIDToAddRef.current.value.trim();
         const geneticDisorder = genDisorderToAddRef.current.value.trim();
 
-        console.log("pagejs gen: " + geneticDisorder)
         const postData = {
           method: "POST",
           headers: {
@@ -78,65 +76,45 @@ const Application = () => {
             g_disorder: geneticDisorder,
           }),
         };
-        console.log("here p1");
-        // if (parentID.length !== 14) {
-        //   console.log("length MUST BE 14")
-        //   return;
-        // }
-        console.log("parentID.lengthhh" + parentID.length);
+
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_URL}/api/application`,
           postData
         );
 
-          console.log("here p2")
-        console.log("POST -- URL BEING USED:" + process.env.NEXT_PUBLIC_URL)
         if (!res.ok) {
           setError(true);
-          console.log("duplicates!");
           throw new Error(`API request failed with status ${res.status}`);
         }
 
-        // console.log("resss: " + res.json())
         const response = await res.json();
-        console.log("POST --- API Response:", response);
+
         if (response.message !== "success") {
           console.error("API Error:", response.message);
           return;
         }
         if (response.message === "success") {
           setCreated(true);
-          // router.push({
-          //   pathname: '/profile',
-          //   query: {
-          //     sex: sexOfChildToAddRef.current.value.trim(),
-          //     child_age: ageOfChildToAddRef.current.value.trim(),
-          //     p_id: parentIDToAddRef.current.value.trim(),
-          //   },
-          // });
         }
       } catch (error) {
         console.error("POST -- Error fetching data:", error);
-        //return res.json({ response: { message: "error", error: error.message } }, 500);
       }
       
     }
 
     const onProfileClick = () => {
-      console.log("profile button clicked")
-      router.push("/profile") // OR /about/id OR /profile/[id]???
+      router.push("/profile") 
     }
     
   return (
     <>
-    
     <main className={styles.mainBox}>
-        <form className= {styles.formElement} onSubmit={addData} method='POST'>
-            <div className={styles.formContainer}>
-                <div className={styles.headingContainer}>
-                  <h1 className={styles.h1}>Apply for Adoption</h1>
-                  <p className={styles.pTag}>Building relationships, one family at a time.</p>
-                </div>
+      <form className= {styles.formElement} onSubmit={addData} method='POST'>
+        <div className={styles.formContainer}>
+            <div className={styles.headingContainer}>
+              <h1 className={styles.h1}>Apply for Adoption</h1>
+                <p className={styles.pTag}>Building relationships, one family at a time.</p>
+            </div>
 
                 <div className={styles.inputsContainer}>
                     {/* Id of parents */}
@@ -162,7 +140,7 @@ const Application = () => {
                         type="text"
                         // name="Sex"
                         ref={sexOfChildToAddRef}
-                        placeholder="male / female" 
+                        placeholder="male / female / other" 
                         required
                         />
                     </div>
@@ -212,11 +190,8 @@ const Application = () => {
                         <label htmlFor="no">No</label>
                     </div>
                 </div>
-            {/* </div> */}
-            {/* make btn input ig? */}
-            {/* {created ? <div>Success!</div> : null} */}
-            {/* <button type="submit">Submit Application</button>  */}
-            {/* <div> */}
+
+            {/* Save to DB */}
             <div className={styles.saveButton}>
               <input
                   value="Save"
@@ -227,36 +202,17 @@ const Application = () => {
             {created && <div className={styles.successMsg}>Success!</div>}
             {error && <div className={styles.errorMsg}>Error: Login or Use a different ID</div>}
             </div>
+
             <div className={styles.formImage}>
               <Image src={formImage} alt='Family Form Image'/>
             </div>
-        </form>
+      </form>
 
         <div className={styles.profileBtn}>
           <button onClick={() => onProfileClick()}>Proceed to profile</button>
         </div>
-      </main>
+    </main>
         
-
-
-        {/* Display the fetched data */}
-      <div>
-      <h2>Read Applications</h2>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : applicationStuff.length > 0 ? (
-        applicationStuff.map((item, index) => {
-          return (
-            <div key={item.app_id}>
-              <span>agency_id</span>: {item.app_id} <br />
-              <span>p ID</span>: {item.p_id}
-            </div>
-          );
-        })
-      ) : (
-        <p>No applns to display.</p>
-      )}
-      </div>
     </>
   );
 };
