@@ -15,8 +15,6 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Header />
         {children}
-        <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
-        <script src="https://mediafiles.botpress.cloud/fa017204-5ea9-4145-9c48-412bdfc60c28/webchat/config.js" defer></script>
       </body>
     </html>
   )
