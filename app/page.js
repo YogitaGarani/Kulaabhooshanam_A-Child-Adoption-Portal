@@ -8,6 +8,7 @@ import Link from 'next/link';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { testimonials } from './testimonials';
+import Script from 'next/script'
 
 export default function Home() {
   const router = useRouter();
@@ -46,6 +47,7 @@ export default function Home() {
   }, []);
 
   const onApplyClick = () => {
+    // console.log("apply button clicked")
     router.push("/application")
   }
 
@@ -65,7 +67,29 @@ export default function Home() {
     },
   }
 
+  // bot configs
+  const initBotpress = () => {
+    window.botpressWebChat.init({
+      "composerPlaceholder": "Come say Hi!",
+      "botConversationDescription": "The Kulaabhooshanam team is happy to help you",
+      "botId": "fa017204-5ea9-4145-9c48-412bdfc60c28",
+      "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+      "messagingUrl": "https://messaging.botpress.cloud",
+      "clientId": "fa017204-5ea9-4145-9c48-412bdfc60c28",
+      "webhookId": "af81bfda-4e1b-43bd-ab88-52e6d969bc71",
+      "lazySocket": true,
+      "themeName": "prism",
+      "frontendVersion": "v1",
+      "useSessionStorage": true,
+      "enableConversationDeletion": true,
+      "showPoweredBy": true,
+      "theme": "prism",
+      "themeColor": "#2563eb"
+  });
+  }
+
   return (
+    <>
     <div className={styles.container}>
       <div className={styles.backgroundImage}>
         <h1 className={styles.insideText}>Welcome to Kulaabhooshanam!</h1>
@@ -128,7 +152,7 @@ export default function Home() {
         ))}
       </Carousel>
 
-          {/* Apply for adoption CTA */}
+      {/* Apply for adoption CTA */}
       <div className={styles.centerButtonContainer}>
         <button className={styles.applyNowBtn} onClick={() => onApplyClick()}>Apply Now</button>
       </div>
@@ -141,5 +165,14 @@ export default function Home() {
       </div>
 
     </div>
+
+    <Script 
+    src="https://cdn.botpress.cloud/webchat/v1/inject.js" 
+    onLoad={() => {
+      initBotpress(); // update the parameters everytime there's a change
+    }}
+    strategy='afterInteractive'
+    />
+    </>
   )
 }
