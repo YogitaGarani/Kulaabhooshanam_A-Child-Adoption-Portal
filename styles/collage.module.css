@@ -1,0 +1,16 @@
+.collageContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    transform: rotate(-2deg); /* Rotate the entire grid */
+  }
+  
+  .imageContainer {
+    position: relative;
+    width: 100%;
+    height: 100%; /* Set a fixed height for each image container */
+    overflow: hidden;
+    border-radius: 8px;
+    transform: rotate(10deg); /* Rotate each image container */
+  }
+  

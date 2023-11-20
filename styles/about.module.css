@@ -1,0 +1,30 @@
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+}
+
+.contentContainer > h2 {
+    text-align: center;
+    margin-top: 2%;
+}
+
+.contentContainer > p {
+    text-align: justify;
+}
+
+.hrElement {
+    width: 50px; 
+    margin: 10px auto; 
+    border: none; 
+    border-top: 1.5px solid #000;
+}
+
+.contactInfo {
+    margin-top: 1%;
+}
+
+.contactInfo > span {
+    margin-right: 3%;
+    font-weight: 500;
+}

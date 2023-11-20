@@ -1,0 +1,57 @@
+.footer {
+  background-color: rgba(237, 248, 233, 0.95);
+  color: black;
+  text-align: center;
+  min-height: 10vh;
+  margin-top: auto;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0;
+  width: 100%;
+}
+  
+  .navContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .footerColumn {
+    flex: 1;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .footerColumn h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .footerColumn ul {
+    list-style: none; /* Remove the bullet points */
+    padding: 0;
+    text-align: center;
+  }
+  
+  .footerColumn li {
+    margin: 5px 0;
+    text-align: left; /* Left-align the list items */
+  }
+  
+  .link {
+    color: black;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  
+  .link:hover {
+    color: black;
+  }
+  
+  .link:active {
+    color: black;
+  }
+  
+  .link:visited {
+    color: black;
+  }
+  

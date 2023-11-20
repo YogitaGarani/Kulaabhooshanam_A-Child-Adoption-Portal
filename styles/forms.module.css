@@ -1,0 +1,160 @@
+.mainBox {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.formElement {
+    background: #ffffff;
+    display: flex;
+    border-radius: 0.5rem;
+    width: 50%;
+    font-weight: 400;
+    padding-left: 2rem;
+    margin-top: 2rem;
+}
+
+.formContainer {
+    background: #ffffff;
+    display: flex;
+    flex-direction: column; 
+    border-radius: 0.5rem;
+    width: 50%;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+  
+
+.headingContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0.5rem;
+}
+
+.h1 {
+    font-size: 1.875rem;
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.pTag {
+    font-size: medium;
+    color: #4a5568;
+    font-weight: 500;
+    font-style: italic;
+}
+
+
+.inputsContainer > div {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inputDivs {
+    padding-bottom: 1rem;
+}
+
+.inputDivs > label {
+    display: block;
+    font-size: small;
+    padding-bottom: 0.5rem;
+}
+
+.inputBox {
+    padding-bottom: 1rem;
+    border: 1px solid #718096;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    width: 60%;
+}
+
+
+.inputBox:focus {
+    border-color: #319795;
+    outline-color: #319795;
+    outline-width: 2px;
+    outline-style: auto;
+}
+
+.radioDivs {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+
+.radioDivs > * + * {
+    margin-left: 0.5rem; 
+}
+
+.radioLabel {
+    display: block;
+    font-size: small;
+    padding-bottom: 0.5rem;
+}
+
+.formImage {
+    position: relative;
+    display: flex;
+    width: 50%;
+}
+
+.formImage > img {
+    width: 100%;
+    height: 90%;
+    border-radius: 5%;
+    padding: 0.5rem;
+}
+
+.saveButton > input {
+    background-color: #31974e;
+    color: white;
+    font-size: small;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    width: 90%;
+    /* margin-top: 1.2rem; */
+    border-radius: 0.5rem;
+}
+
+.profileBtn {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.profileBtn button { 
+    background-color: #31974e;
+    color: white;
+    padding: 0.5rem 2rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+}
+
+.successMsg {
+    margin-top: 2%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 5%;
+    width: 90%;
+    font-size: medium;
+    box-sizing: border-box;
+    color: darkgreen;
+    background-color: #a5e1b3ef;
+  }
+
+.errorMsg {
+    color: red;
+    font-size: medium;
+}
+
+@media screen and (max-width: 600px) {
+    .formElement {
+        width: 90%;
+    }
+}

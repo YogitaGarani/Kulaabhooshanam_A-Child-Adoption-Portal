@@ -1,0 +1,74 @@
+.profileContainer {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;   
+}
+
+.inputDiv {
+    padding-bottom: 1rem;
+}
+
+.inputDiv > label {
+    display: block;
+    font-size: medium;
+    padding-bottom: 0.5rem;
+}
+
+.inputBox {
+    border: 1px solid #718096;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    width: 100%;
+}
+
+.inputBox:focus {
+    border-color: #319795;
+    outline-color: #319795;
+    outline-width: 2px;
+    outline-style: auto;
+}
+
+.statusBtn {
+    text-align: center;
+    margin-top: 0.25rem;
+}
+
+.statusBtn button {
+    background-color: #31974e;
+    color: white;
+    padding: 0.5rem 2rem;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+.userPageContainer {
+    padding: 1rem;
+}
+
+.childCard {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+  
+.childCard h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+.childCard p {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+  
+.childCard span {
+    font-weight: bold;
+}  
